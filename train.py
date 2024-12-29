@@ -7,12 +7,12 @@ if __name__ == "__main__":
     Logger.setup_logging()
 
     # Configuration
-    MODEL_NAME = "NovusResearch/Novus-7b-tr_v1"
-    DATASET_NAME = "savasy/ttc4900"  # Dataset from Hugging Face
-    OUTPUT_DIR = "./fine_tuned_model"
+    MODEL_NAME = MODELS[0] 
+    DATASET_NAME = DATASET  # Dataset from Hugging Face
+    OUTPUT_DIR = "NLP_FINAL_PROJECT/outputs"
     MAX_LENGTH = 128
-    TRAIN_EPOCHS = 3
-    #BATCH_SIZE = 4
+    TRAIN_EPOCHS = 1
+    BATCH_SIZE = 4
 
     # LoRA configuration
     lora_config = LoraConfig(
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         save_steps=10,
         save_total_limit=2,
         fp16=True,
-        logging_dir="./logs"
+        logging_dir="NLP_FINAL_PROJECT/logs"
     )
 
     # Dataset handling
@@ -50,6 +50,10 @@ if __name__ == "__main__":
     # Model training
     trainer = ModelTrainer(MODEL_NAME, OUTPUT_DIR, lora_config, train_args)
     model, tokenizer = trainer.load_model()
+
+    print("Sample Input IDs:", train_dataset[0]["input_ids"])
+    print("Sample Labels:", train_dataset[0]["labels"])
+
     trainer.train(model, tokenizer, train_dataset, eval_dataset)
 
     # Model evaluation
