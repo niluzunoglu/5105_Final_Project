@@ -1,6 +1,6 @@
 # BLM5105 Doğal Dil İşleme Dersi Final Projesi
 
-Bu repository, **5105 Hesaplamalı Anlambilim Dersi** için hazırlanan final projesini içermektedir. Proje, **haber özetleri ve başlık arasındaki anlam ilişkileri** üzerine odaklanmaktadır ve modellerin etkinliğini değerlendirmek için hem otomatik hem de insan değerlendirmelerini içermektedir.
+Bu repository, **5105 Doğal Dil İşleme Dersi** için hazırlanan final projesini içermektedir. Proje, **haber özetleri ve başlık arasındaki anlam ilişkileri** üzerine odaklanmaktadır ve modellerin etkinliğini değerlendirmek için hem otomatik hem de insan değerlendirmelerini içermektedir.
 
 ## Proje Özeti
 Bu projenin ana amacı, en az üç farklı Türkçe GPT modelinin iki görevdeki performansını karşılaştırmaktır:
