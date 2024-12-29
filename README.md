@@ -19,20 +19,23 @@ Bu projenin ana amacı, en az üç farklı Türkçe GPT modelinin iki görevdeki
 
 ```
 5105_Final_Project/
-├── data/                 # Eğitim ve değerlendirme için kullanılan veri seti
-├── models/               # İncelenen Türkçe GPT modelleri
-├── notebooks/            # Deneyler için Jupyter notebook'lar
-├── scripts/              # Veri ön işleme ve değerlendirme için Python betikleri
-├── results/              # Otomatik ve insan değerlendirme sonuçları
+├── logs/                 # Loglar
+├── outputs/              # Çıktıları içeren excel dosyaları
+├── ModelTrainer.py       # Model eğitimi ve evaluationı için oluşturulan sınıf
+├── DatasetHandler.py     # Veri ön işleme ve değerlendirme için oluşturulan sınıf
+├── Logger.py             # Loglama kütüphanesi
 ├── README.md             # Proje dökümantasyonu
 ```
 
+
+
 ### Dizin Detayları
-- **data/**: Özetleme ve başlık oluşturma görevleri için kullanılan veri setini içerir.
-- **models/**: İncelenen Türkçe GPT modellerinin ince ayar yapılmış sürümleri.
-- **notebooks/**: Veri analizi ve model eğitimine yönelik notebook'lar.
-- **scripts/**: Veri ön işleme, model değerlendirme ve metrik hesaplamaları için betikler.
+- **logs/**: Çalışma süresince oluşturulan log dosyalarını içerir.
+- **outputs/**: Model değerlendirme çıktılarının yer aldığı excel dosyalarını içerir.
 - **results/**: Otomatik değerlendirme sonuçlarını ve insan geri bildirim analizlerini içerir.
+- **ModelTrainer.py**: Model eğitimi ve değerlendirmesi için oluşturulan sınıf.
+- **DatasetHandler.py**: Veri ön işleme ve değerlendirme görevlerini gerçekleştiren sınıf.
+- **Logger.py**: Loglama işlemleri için kullanılan özel kütüphane.
 
 ## Gereksinimler
 

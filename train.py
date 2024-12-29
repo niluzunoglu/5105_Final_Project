@@ -1,6 +1,16 @@
 from Logger import Logger
 from DatasetHandler import DatasetHandler
 from ModelTrainer import ModelTrainer
+from peft import LoraConfig 
+from transformers import TrainingArguments, AutoTokenizer
+
+MODELS = ["TURKCELL/Turkcell-LLM-7b-v1",
+          "NovusResearch/Novus-7b-tr_v1",
+          "Orbina/Orbita-v0.1",
+          "sambanovasystems/SambaLingo-Turkish-Chat",
+          "ytu-ce-cosmos/turkish-gpt2-large"]
+
+DATASET = "savasy/ttc4900"
 
 if __name__ == "__main__":
     # Logging setup
