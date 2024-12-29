@@ -1,4 +1,4 @@
-from logger import Logger
+from Logger import Logger
 from datasets import load_dataset
 
 class DatasetHandler:
@@ -13,7 +13,7 @@ class DatasetHandler:
 
         if "validation" not in dataset:
             Logger.log("Validation split not found. Splitting train dataset into train and validation...")
-            dataset = dataset["train"].train_test_split(test_size=0.2)
+            dataset = dataset["train"].train_test_split(test_size=0.119)
             print("[dataset]", dataset)
 
         return dataset
@@ -23,7 +23,7 @@ class DatasetHandler:
             Logger.log("Validation split not found. Splitting train dataset into train and validation...")
             dataset = dataset["train"].train_test_split(test_size=test_size)
         return dataset
-
+        
     def preprocess(self, dataset):
         Logger.log("Simplifying dataset and tokenizing...")
 
@@ -39,14 +39,10 @@ class DatasetHandler:
             )
             # Map category to labels and match the sequence length
             tokenized["labels"] = [
-                [label] * self.max_length for label in examples["category"]
+                label if isinstance(label, int) else 0 for label in examples["category"]
             ]
+            tokenized["labels"] = tokenized["input_ids"]  # Align labels with input_ids
             return tokenized
 
         tokenized_dataset = dataset.map(simplify_and_tokenize_function, batched=True)
-
-        print("Input size:", len(tokenized_dataset["train"][0]["input_ids"]))
-        print("Label size:", len(tokenized_dataset["train"][0]["labels"]))
-
         return tokenized_dataset
-
