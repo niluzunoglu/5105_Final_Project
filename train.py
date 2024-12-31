@@ -17,22 +17,12 @@ if __name__ == "__main__":
     Logger.setup_logging()
 
     # Configuration
-    MODEL_NAME = MODELS[0] 
+    MODEL_NAME = MODELS[0]
     DATASET_NAME = DATASET  # Dataset from Hugging Face
     OUTPUT_DIR = "NLP_FINAL_PROJECT/outputs"
     MAX_LENGTH = 128
     TRAIN_EPOCHS = 1
     BATCH_SIZE = 4
-
-    # LoRA configuration
-    lora_config = LoraConfig(
-        r=16,
-        lora_alpha=32,
-        target_modules=["q_proj", "v_proj"],
-        lora_dropout=0.1,
-        bias="none",
-        task_type="CAUSAL_LM"
-    )
 
     # Training arguments
     train_args = TrainingArguments(
@@ -50,7 +40,7 @@ if __name__ == "__main__":
     # Dataset handling
     dataset_handler = DatasetHandler(DATASET_NAME, AutoTokenizer.from_pretrained(MODEL_NAME), MAX_LENGTH)
     raw_dataset = dataset_handler.load_dataset()
-    split_dataset = dataset_handler.split_dataset(raw_dataset)
+    split_dataset = dataset_handler.split_dataset(raw_dataset, test_size=0.113)
     tokenized_dataset = dataset_handler.preprocess(split_dataset)
 
     # Train-test split
@@ -58,7 +48,7 @@ if __name__ == "__main__":
     eval_dataset = tokenized_dataset["test"]
 
     # Model training
-    trainer = ModelTrainer(MODEL_NAME, OUTPUT_DIR, lora_config, train_args)
+    trainer = ModelTrainer(MODEL_NAME, OUTPUT_DIR, train_args=train_args)
     model, tokenizer = trainer.load_model()
 
     print("Sample Input IDs:", train_dataset[0]["input_ids"])
